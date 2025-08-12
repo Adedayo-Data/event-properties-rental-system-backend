@@ -33,14 +33,16 @@ public class AuthController {
     // sign up controller
     @PostMapping("/register")
     public ResponseEntity<AuthMessage> register(@RequestBody RegisterDTO registerDTO){
+        System.out.println("controller hit!");
         // convert dto object to Entity object
         Users user = new Users();
         user.setFullname(registerDTO.getFullname());
         user.setEmail(registerDTO.getEmail());
-        user.setRole(registerDTO.getRole());
+//        user.setRole(registerDTO.getRole());
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
 
         // save user
+        System.out.println("User role: " + user.getRole().toString());
         Users savedUser = userRepo.save(user);
 
         // Add user to Security
