@@ -22,7 +22,7 @@ public class JwtService {
     public String generateToken(Users users){
 
         Map<String, String> claim = new HashMap<>();
-        claim.put("fullName", users.getFullname());
+        claim.put("fullName", users.getName());
         return Jwts.builder()
                 .subject(users.getEmail())
                 .issuedAt(new Date(System.currentTimeMillis()))

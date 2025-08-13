@@ -20,9 +20,13 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String fullname;
+    private String name;
     private String email;
     private String password;
+    private int totalBookings;
+    private Double totalSpent;
+    private String Status = "active";
+    private String joinDate;
     private ROLE role = ROLE.USER;
 
     @CreatedDate
