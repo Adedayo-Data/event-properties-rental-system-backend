@@ -32,6 +32,7 @@ public class CentersService {
             center.setPrice(updatedCenter.getPrice());
             center.setCapacity(updatedCenter.getCapacity());
             center.setAmenities(updatedCenter.getAmenities());
+            center.setImage(updatedCenter.getImage());
             return centersRepository.save(center);
         }).orElse(null);
     }
