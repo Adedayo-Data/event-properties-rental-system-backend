@@ -2,8 +2,10 @@ package com.eventful.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Data
@@ -16,9 +18,19 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId;          // You may want to map this to a User entity later
-    private Long centerId;        // You can also map this to Centers entity if needed
-    private LocalDate bookingDate;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private Users user;
+
+    @ManyToOne
+    @JoinColumn(name="venue_id", nullable = false)
+    private Centers venue;
+    private LocalDate date;
+    private LocalTime time;
     private String status;        // e.g., "confirmed", "cancelled"
+    // we would create a method in booking controller to change status
+    private Double price;
+    private int guest;
+    private String bookingId;
 }
 

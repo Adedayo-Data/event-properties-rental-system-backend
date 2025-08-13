@@ -5,6 +5,8 @@ import com.eventful.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +31,7 @@ public class BookingService {
 
     public Optional<Booking> updateBooking(Long id, Booking updatedBooking) {
         return bookingRepository.findById(id).map(existing -> {
-            existing.setBookingDate(updatedBooking.getBookingDate());
+            existing.setDate(updatedBooking.getDate());
             existing.setStatus(updatedBooking.getStatus());
             return bookingRepository.save(existing);
         });
@@ -41,6 +43,12 @@ public class BookingService {
             return true;
         }
         return false;
+    }
+
+    public String generateBookingId() {
+        String datePart = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        int randomPart = (int) (Math.random() * 9000) + 1000; // random 4-digit number
+        return "BK-" + datePart + "-" + randomPart;
     }
 }
 
