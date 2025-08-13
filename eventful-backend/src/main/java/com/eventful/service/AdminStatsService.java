@@ -41,7 +41,7 @@ public class AdminStatsService {
     public int getTodayBookingsCount() {
         LocalDate today = LocalDate.now();
         return (int) bookingRepository.findAll().stream()
-                .filter(b -> b.getBookingDate().equals(today))
+                .filter(b -> b.getDate().equals(today))
                 .count();
     }
 
@@ -54,7 +54,7 @@ public class AdminStatsService {
         for (int i = 0; i < 6; i++) {
             YearMonth month = YearMonth.now().minusMonths(i);
             double monthlyRevenue = bookings.stream()
-                    .filter(b -> YearMonth.from(b.getBookingDate()).equals(month))
+                    .filter(b -> YearMonth.from(b.getDate()).equals(month))
                     .mapToDouble(this::calculateBookingRevenue)
                     .sum();
             revenueMap.put(month.toString(), monthlyRevenue);
@@ -65,7 +65,7 @@ public class AdminStatsService {
 
     // Helper method
     private double calculateBookingRevenue(Booking booking) {
-        Optional<Centers> center = centersRepository.findById(booking.getCenterId());
+        Optional<Centers> center = centersRepository.findById(booking.getVenue().getId());
         return center.map(Centers::getPrice).orElse(0.0);
     }
 }

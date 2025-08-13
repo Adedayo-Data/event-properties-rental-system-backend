@@ -36,7 +36,7 @@ public class AuthController {
         System.out.println("controller hit!");
         // convert dto object to Entity object
         Users user = new Users();
-        user.setFullname(registerDTO.getFullname());
+        user.setName(registerDTO.getFullname());
         user.setEmail(registerDTO.getEmail());
 //        user.setRole(registerDTO.getRole());
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
@@ -63,6 +63,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest){
+        System.out.println("Login controller hit!");
         String username = loginRequest.getEmail();
         String password = loginRequest.getPassword();
 
