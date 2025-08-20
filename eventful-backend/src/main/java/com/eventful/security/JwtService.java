@@ -26,7 +26,7 @@ public class JwtService {
         return Jwts.builder()
                 .subject(users.getEmail())
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 10000 * 60 * 60))
+                .expiration(new Date(System.currentTimeMillis() + 100000 * 60 * 60))
                 .claims(claim)
                 .signWith(Keys.hmacShaKeyFor(constant.JWTKEY.getBytes()))
                 .compact();
