@@ -9,5 +9,5 @@ public class RegisterDTO {
     private String fullname;
     private String email;
     private String password;
-//    private ROLE role;
+    private ROLE role = ROLE.USER;
 }
