@@ -5,6 +5,7 @@ import com.eventful.repository.CentersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +34,7 @@ public class CentersService {
             center.setCapacity(updatedCenter.getCapacity());
             center.setAmenities(updatedCenter.getAmenities());
             center.setImage(updatedCenter.getImage());
+            center.setAvailableDates(updatedCenter.getAvailableDates());
             return centersRepository.save(center);
         }).orElse(null);
     }
@@ -43,5 +45,14 @@ public class CentersService {
             return true;
         }
         return false;
+    }
+
+    public List<String> getAvailableDates(Long id) {
+        Optional<Centers> optCenter = getCenterById(id);
+        if(optCenter.isEmpty()){
+            return null;
+        }
+        Centers center = optCenter.get();
+        return center.getAvailableDates();
     }
 }

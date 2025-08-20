@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,4 +48,10 @@ public class eventCenterController {
         System.out.println("Testing delete Controller!");
         return ResponseEntity.ok(centersService.deleteCenter(id));
     }
+
+    @GetMapping("/{id}/available-dates")
+    public List<String> getAvailableDates(@PathVariable Long id) {
+        return centersService.getAvailableDates(id);
+    }
+
 }
