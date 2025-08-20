@@ -11,7 +11,6 @@ import java.time.LocalTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Booking {
 
     @Id
@@ -26,7 +25,7 @@ public class Booking {
     @JoinColumn(name="venue_id", nullable = false)
     private Centers venue;
     private LocalDate date;
-    private LocalTime time;
+    private String time;
     private String status;        // e.g., "confirmed", "cancelled"
     // we would create a method in booking controller to change status
     private Double price;
