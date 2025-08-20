@@ -38,7 +38,7 @@ public class AuthController {
         Users user = new Users();
         user.setName(registerDTO.getFullname());
         user.setEmail(registerDTO.getEmail());
-//        user.setRole(registerDTO.getRole());
+        user.setRole(registerDTO.getRole());
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
 
         // save user
@@ -66,6 +66,9 @@ public class AuthController {
         System.out.println("Login controller hit!");
         String username = loginRequest.getEmail();
         String password = loginRequest.getPassword();
+
+        System.out.println("username is: "+ username);
+        System.out.println("password is: "+password);
 
         // find user from db
        Users user = userRepo.findByEmail(username);

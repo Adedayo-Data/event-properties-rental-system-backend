@@ -1,9 +1,6 @@
 package com.eventful.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,11 +18,15 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+
+    @Column(unique = true)
     private String email;
     private String password;
     private int totalBookings;
     private Double totalSpent;
     private String Status = "active";
+
+    @CreatedDate
     private String joinDate;
     private ROLE role = ROLE.USER;
 
